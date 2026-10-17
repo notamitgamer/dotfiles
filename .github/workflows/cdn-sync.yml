@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Build single-file bundle for install.sh
+      - name: Build single-file bundle for install.sh (keeps symlinks)
         run: |
           tar --exclude='.git' --exclude='.github' --exclude='dotfiles.tar.gz' -czf /tmp/dotfiles.tar.gz .
           cp /tmp/dotfiles.tar.gz dotfiles.tar.gz
@@ -23,8 +23,10 @@ jobs:
             const token = await core.getIDToken('cdn.amit.is-a.dev')
             core.setSecret(token)
             core.setOutput('token', token)
-      - name: Package repo contents
-        run: tar --exclude='.git' -czf /tmp/payload.tar.gz .
+      - name: Package repo contents (CDN rejects symlinks, so skip them)
+        run: |
+          find . -mindepth 1 -path ./.git -prune -o ! -type l -print0 \
+            | tar --null --no-recursion -czf /tmp/payload.tar.gz -T -
       - name: Push to CDN
         env:
           OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
