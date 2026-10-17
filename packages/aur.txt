@@ -1,0 +1,5 @@
+visual-studio-code-bin
+vesktop-bin
+localsend-bin
+cloudflare-warp-bin
+bibata-cursor-theme

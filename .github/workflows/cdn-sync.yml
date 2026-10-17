@@ -1,0 +1,34 @@
+name: Sync to CDN
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build single-file bundle for install.sh
+        run: |
+          tar --exclude='.git' --exclude='.github' --exclude='dotfiles.tar.gz' -czf /tmp/dotfiles.tar.gz .
+          cp /tmp/dotfiles.tar.gz dotfiles.tar.gz
+      - name: Request GitHub OIDC token
+        id: oidc
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const token = await core.getIDToken('cdn.amit.is-a.dev')
+            core.setSecret(token)
+            core.setOutput('token', token)
+      - name: Package repo contents
+        run: tar --exclude='.git' -czf /tmp/payload.tar.gz .
+      - name: Push to CDN
+        env:
+          OIDC_TOKEN: ${{ steps.oidc.outputs.token }}
+        run: |
+          curl -sS --fail-with-body -X POST https://cdn.amit.is-a.dev/api/gh-sync \
+            -F "token=$OIDC_TOKEN" \
+            -F "archive=@/tmp/payload.tar.gz"

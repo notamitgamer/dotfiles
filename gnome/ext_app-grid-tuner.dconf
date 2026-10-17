@@ -1,0 +1,5 @@
+[/]
+appgrid-icon-size=40
+appgrid-max-columns=8
+appgrid-max-rows=3
+reload-signal=true

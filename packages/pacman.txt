@@ -1,0 +1,5 @@
+base-devel git github-cli zsh starship alacritty neovim micro fastfetch eza fd fzf ripgrep zoxide
+nodejs npm rust python-pipx jdk-openjdk podman android-tools cloudflared firefox vlc obsidian
+libreoffice-fresh conky gamemode ptyxis gnome-tweaks gnome-shell-extensions pavucontrol baobab
+gnome-calculator gnome-system-monitor loupe papers xclip wl-clipboard tree unzip wget
+adw-gtk-theme ttf-jetbrains-mono-nerd ttf-fira-code

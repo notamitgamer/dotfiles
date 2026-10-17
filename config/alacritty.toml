@@ -1,0 +1,28 @@
+[window]
+padding = { x = 16, y = 16 }
+opacity = 0.85
+decorations = "None"
+
+[font]
+size = 8.6
+
+ [font.normal]
+family = "Comic Code"
+style = "Regular" 
+
+[font.bold] 
+family = "Comic Code" 
+style = "Bold" 
+
+[font.italic] 
+family = "Comic Code" 
+style = "Italic"
+
+[colors.primary]
+background = "#0A0E14"
+foreground = "#ECEFF4"
+
+
+[colors.cursor]
+text = "#1a1b26"
+cursor = "#c0caf5"

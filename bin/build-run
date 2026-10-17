@@ -1,0 +1,114 @@
+#!/bin/bash
+
+file="$1"
+if [ -z "$file" ]; then
+    echo "Usage: build-run <filename.cpp or filename.c>"
+    exit 1
+fi
+
+fileBasename=$(basename "$file")
+fileDirname=$(dirname "$(realpath "$file")")
+fileBasenameNoExtension="${fileBasename%.*}"
+fileExtname=".${fileBasename##*.}"
+
+if [ "$fileExtname" = ".cpp" ]; then c="g++"; else c="gcc"; fi
+exe="${fileDirname}/${fileBasenameNoExtension}"
+logDir="$HOME/Documents/bsc/buildLog"
+mkdir -p "$logDir"
+ts=$(date +"%Y-%m-%d_%H-%m-%M_%S")
+logFile="$logDir/buildLog_$ts.txt"
+B="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+# Automatically delete the generated binary on exit/interrupt
+trap 'rm -f "$exe"' EXIT
+
+# Logging helper functions: Output ONLY to log file
+fnH() {
+    title="$1"; show_l="${3:-true}"; nl="${4:-true}"
+    if [ "$show_l" = "true" ]; then
+        if [ "$nl" = "true" ]; then echo "" >> "$logFile"; fi
+        echo "$B" >> "$logFile"
+        echo " $title" >> "$logFile"
+        echo "$B" >> "$logFile"
+        echo "" >> "$logFile"
+    fi
+}
+
+fnR() { 
+    pad=$(printf "%-16s" "$1")
+    echo "${pad}$2" >> "$logFile"
+}
+
+fnL() { 
+    clean=$(echo "$1" | sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,3})*)?[mGK]//g")
+    echo "$clean" >> "$logFile"
+}
+
+fnT() { 
+    if [ $1 -ge 1000 ]; then echo "$(($1 / 1000)) sec ($1 ms)"; else echo "$1 ms"; fi
+}
+
+ver=$($c --version | head -n 1)
+
+# Start logging
+fnH "BUILD" true true false
+fnL "Compiling ${fileBasename}..."
+fnL "$ver"
+fnL ""
+
+shift 1
+
+# Measure build time
+t0_build=$(date +%s%3N)
+$c "$file" -o "$exe" "$@" 2>&1 | tee -a >(sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,3})*)?[mGK]//g" >> "$logFile")
+build_status=${PIPESTATUS[0]}
+t1_build=$(date +%s%3N)
+build_time=$((t1_build - t0_build))
+
+loc=$(wc -l < "$file" 2>/dev/null || echo "0")
+
+# Log Build Report (Log file only)
+fnH "BUILD REPORT"
+fnR "Source" "$fileBasename"
+fnR "Lines of Code" "$loc"
+fnR "Timestamp" "$(date +'%Y-%m-%d %H:%M:%S')"
+fnR "Compiler" "$c"
+fnR "Target" "x64"
+if [ $build_status -eq 0 ]; then
+    fnR "Build" "✓ Success"
+else
+    fnR "Build" "✗ Failed"
+fi
+fnR "Build Time" "$(fnT $build_time)"
+fnR "Log File" "$logFile"
+
+if [ $build_status -ne 0 ]; then
+    echo ""
+    echo "------------------------------------------------------------"
+    echo "buildlog saved at file://$logFile"
+    exit $build_status
+fi
+
+# Run executable
+fnH "RUN"
+t0_run=$(date +%s%3N)
+
+# Program execution goes directly to terminal & logs to file
+"$exe" 2>&1 | tee -a >(sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,3})*)?[mGK]//g" >> "$logFile")
+run_status=${PIPESTATUS[0]}
+
+t1_run=$(date +%s%3N)
+run_time=$((t1_run - t0_run))
+
+# Log Execution Report (Log file only)
+fnH "EXECUTION REPORT"
+fnR "Exit Code" "$run_status"
+fnR "Runtime" "$(fnT $run_time)"
+fnR "Executable" "Removed"
+
+# Print footer in terminal
+echo ""
+echo "------------------------------------------------------------"
+echo "buildlog saved at file://$logFile"
+
+exit $run_status

@@ -1,0 +1,23 @@
+format = """
+[ $username ]($style)\
+[](fg:#24283b bg:#3b4261)\
+$directory\
+[](fg:#3b4261 bg:#565f89)\
+[](fg:#565f89 bg:#7aa2f7)\
+[](fg:#7aa2f7 bg:#c0caf5)\
+[ ](fg:#c0caf5)\
+"""
+
+add_newline = false
+
+[username]
+show_always = true
+style_user = "bg:#24283b fg:#c0caf5 bold"
+style_root = "bg:#24283b fg:#f7768e bold"
+format = '[$user]($style)'
+
+[directory]
+style = "fg:#1a1b26 bg:#3b4261 bold"
+format = "[ $path ](fg:#eff0f2 bg:#3b4261 bold)"
+truncation_length = 3
+truncation_symbol = "…/"

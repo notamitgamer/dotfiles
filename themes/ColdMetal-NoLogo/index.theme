@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Cold Metal
+Comment=Cold Metal is based based on 'Tokyonight' GTK theme.
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Cold Metal
+MetacityTheme=Cold Metal
+IconTheme=Cold Metal
+CursorTheme=
+ButtonLayout=close,minimize,maximize:menu

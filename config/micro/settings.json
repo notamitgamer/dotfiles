@@ -1,0 +1,9 @@
+{
+  "colorscheme": "transparent-vivid",
+  "cursorline": true,
+  "ruler": true,
+  "scrollbar": false,
+  "statusline": true,
+  "tabstospaces": true,
+  "tabsize": 4
+}

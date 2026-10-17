@@ -1,0 +1,3 @@
+firebase-tools
+@vscode/vsce
+retypeapp

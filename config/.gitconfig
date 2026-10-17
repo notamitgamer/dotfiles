@@ -1,0 +1,15 @@
+[user]
+	email = mail@amit.is-a.dev
+	name = Amit Dutta
+	signingkey = /home/notamitgamer/.ssh/id_ed25519.pub
+[commit]
+	gpgsign = true
+[gpg]
+	format = ssh
+[alias]
+	p = "! $HOME/.config/git-push-pr.sh"
+	clear = !git checkout main && git fetch -p && git branch -vv | grep \": gone]\" | awk \"{print \\$1}\" | xargs -r git branch -D
+[credential]
+	helper = store
+[init]
+	defaultBranch = main

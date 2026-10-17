@@ -1,0 +1,3 @@
+[/]
+maximize=['<Super>Up']
+unmaximize=['<Super>Down', '<Alt>F5']

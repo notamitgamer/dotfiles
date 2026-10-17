@@ -1,0 +1,10 @@
+*.pem
+*.key
+.env
+.env.*
+.git-credentials
+id_*
+fonts/
+ComicCode*
+*.bak*
+.DS_Store

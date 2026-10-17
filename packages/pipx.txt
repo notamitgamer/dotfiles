@@ -1,0 +1,4 @@
+githrun
+gnome-extensions-cli
+playwright
+huggingface_hub

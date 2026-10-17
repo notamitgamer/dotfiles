@@ -1,0 +1,19 @@
+[/]
+accent-color='slate'
+color-scheme='prefer-dark'
+cursor-blink=true
+cursor-blink-time=1000
+cursor-size=13
+cursor-theme='Bibata-Modern-Ice'
+document-font-name='Comic Code  10'
+enable-animations=true
+font-antialiasing='grayscale'
+font-name='Comic Code  10'
+gtk-enable-primary-paste=true
+gtk-im-module=''
+gtk-theme='ColdMetal-NoLogo'
+icon-theme='Tela-manjaro-dark'
+monospace-font-name='Comic Code  10'
+scaling-factor=uint32 1
+text-scaling-factor=0.79999999999999982
+toolbar-style='text'

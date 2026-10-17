@@ -1,0 +1,13 @@
+/* Unified ColdMetal border on application windows */
+window.csd,
+window.solid-csd,
+window.background {
+    border: 1px solid rgba(191, 201, 244, 0.5) !important;
+    outline: none !important;
+}
+
+window.csd:backdrop,
+window.solid-csd:backdrop,
+window.background:backdrop {
+    border: 1px solid rgba(191, 201, 244, 0.2) !important;
+}

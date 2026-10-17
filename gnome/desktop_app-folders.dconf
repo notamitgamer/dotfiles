@@ -1,0 +1,32 @@
+[/]
+folder-children=['System', 'Utilities', 'YaST', 'Pardus', '25cba9b1-1e4a-4939-8e5f-5296a138f7dd', 'd5b9ecbc-2a23-4bc0-b2de-283e5ba23bca']
+
+[folders/25cba9b1-1e4a-4939-8e5f-5296a138f7dd]
+apps=['org.gnome.TextEditor.desktop', 'org.gnome.Calendar.desktop', 'org.gnome.gedit.desktop', 'org.gnome.Software.desktop']
+name='Extra'
+translate=false
+
+[folders/Pardus]
+categories=['X-Pardus-Apps']
+name='X-Pardus-Apps.directory'
+translate=true
+
+[folders/System]
+apps=['org.gnome.baobab.desktop', 'org.gnome.DiskUtility.desktop', 'org.fedoraproject.MediaWriter.desktop', 'org.gnome.Yelp.desktop', 'org.gnome.Logs.desktop', 'org.freedesktop.MalcontentControl.desktop', 'org.gnome.Tour.desktop']
+name='X-GNOME-Shell-System.directory'
+translate=true
+
+[folders/Utilities]
+apps=['org.gnome.Decibels.desktop', 'org.gnome.Boxes.desktop', 'org.gnome.Snapshot.desktop', 'org.gnome.Characters.desktop', 'org.gnome.clocks.desktop', 'org.gnome.Connections.desktop', 'org.gnome.Contacts.desktop', 'org.gnome.SimpleScan.desktop', 'org.gnome.Papers.desktop', 'org.gnome.font-viewer.desktop', 'org.gnome.Loupe.desktop', 'org.gnome.Maps.desktop', 'org.gnome.Weather.desktop', 'org.gnome.Showtime.desktop', 'org.gnome.tweaks.desktop', 'org.videolan.VLC.desktop', 'org.gnome.Calculator.desktop']
+name='X-GNOME-Shell-Utilities.directory'
+translate=true
+
+[folders/YaST]
+categories=['X-SuSE-YaST']
+name='suse-yast.directory'
+translate=true
+
+[folders/d5b9ecbc-2a23-4bc0-b2de-283e5ba23bca]
+apps=['claude.desktop', 'gemini.desktop']
+name='AI'
+translate=false
